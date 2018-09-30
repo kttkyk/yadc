@@ -65,15 +65,8 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    if options.iface:
-        iface = options.iface
-    else:
-        iface = conf.iface
-
-    if options.mac:
-        mac = options.mac
-    else:
-        mac = get_if_hwaddr(iface)
+    iface = options.iface if options.iface else conf.iface
+    mac = options.mac if options.mac else get_if_hwaddr(iface)
 
     claimed_ip = claim_ip(iface, mac, options.hostname)
 
